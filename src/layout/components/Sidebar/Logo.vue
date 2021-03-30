@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import image1 from './logooo.png'
+import image1 from './logo.png'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: '虚假语音检测',
+      // title: '| Dolphin',
       logo: image1
     }
   }
@@ -56,10 +56,12 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
+      // width: 32px;
       height: 32px;
       vertical-align: middle;
       margin-right: 12px;
+      margin-bottom: 10px;
+      margin-top: 10px;
     }
 
     & .sidebar-title {

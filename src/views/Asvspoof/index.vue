@@ -2,9 +2,9 @@
   <div class="outer">
     <el-card class="title-card" shadow="hover">
       <div class="title">
-        <font face="bold" style="font-size: 60px;"><strong>欢迎使用语音生成！</strong></font>
+        <font face="bold" style="font-size: 60px;"><strong>欢迎使用音频鉴伪功能！</strong></font>
         <br><br><br>
-        <font face="YouYuan" style="font-size: 20px;">这是语音转换界面，你可以选择两段音频分别作为输入内容源和音色源，我们会自动帮你生成转换后的音频。相关的信息会自动显示在两侧。</font>
+        <font face="YouYuan" style="font-size: 20px;">这是深度伪造音频鉴别界面，你可以上传任何想要鉴别的音频源，选取判别对象或数据集，我们将反馈关于该音频的分析。</font>
       </div>
     </el-card>
     <div class="mainn">
@@ -50,7 +50,7 @@
                 </el-select>
               </el-col>
               <el-col :span="12">
-                <el-button class="bottom-class" @click="convertt">
+                <el-button class="bottom-class" @click="convertt" type="primary" plain>
                   <div>点击检测</div>
                 </el-button>
               </el-col>
@@ -152,11 +152,9 @@ export default {
     margin:50px;
   }
   .title{
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 50px;
-    color: #000000;
+    margin-top: 50px;
+    margin-left: 60px;
+    /*color: #ffffff;*/
     /*color: transparent;*/
     /* -webkit-text-stroke: 1px black; */
     letter-spacing: 0.04em;
@@ -189,14 +187,14 @@ export default {
     color: #ffffff;
   }
   .border{
-    margin-top: 50px;
+    margin-top: 0px;
   }
   .secondrow{
     margin-top: 50px;
   }
   .optionn{
     margin-left: 50px;
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .title-card{
     width: 900px;

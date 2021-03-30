@@ -2,7 +2,7 @@
   <div class="outer">
     <el-card class="title-card" shadow="hover">
       <div class="title">
-        <font face="bold" style="font-size: 60px;"><strong>欢迎使用语音生成！</strong></font>
+        <font face="bold" style="font-size: 60px;"><strong>欢迎使用语音生成功能！</strong></font>
         <br><br><br>
         <font face="YouYuan" style="font-size: 20px;">这是语音转换界面，你可以选择两段音频分别作为输入内容源和音色源，我们会自动帮你生成转换后的音频。相关的信息会自动显示在两侧。</font>
       </div>
@@ -35,8 +35,8 @@
             <div :class="i">{{ empty }}</div>
           </el-col>
         </el-row>
-        <div style="margin-top: 150px" />
-        <el-button class="bottom-class" @click="convertt">
+        <div style="margin-top: 130px" />
+        <el-button class="bottom-class" @click="convertt" type="primary" plain>
           <div>点击转换</div>
         </el-button>
       </el-col>
@@ -211,7 +211,9 @@ export default {
     text-align: center
   }
   .info{
-    margin-top: 50px;
+    margin:0 auto;
+    margin-top: 30px;
+    width: 1100px
   }
   .infoleft{
     position: relative;
