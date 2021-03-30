@@ -1,6 +1,6 @@
 import os
 from flask import *
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import json
 from flask_cors import CORS

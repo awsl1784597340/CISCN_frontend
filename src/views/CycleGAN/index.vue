@@ -1,11 +1,13 @@
 <template>
   <div class="outer">
-    <el-card class="cardd" shadow="hover">
-    <el-row>
+    <el-card class="title-card" shadow="hover">
       <div class="title">
-        CycleGAN 语音生成
+        <font face="bold" style="font-size: 60px;"><strong>欢迎使用语音生成！</strong></font>
+        <br><br><br>
+        <font face="YouYuan" style="font-size: 20px;">这是语音转换界面，你可以选择两段音频分别作为输入内容源和音色源，我们会自动帮你生成转换后的音频。相关的信息会自动显示在两侧。</font>
       </div>
-    </el-row>
+    </el-card>
+
     <el-row class="info">
       <el-col :span="11">
         <div class="infoleft">源文件</div>
@@ -92,7 +94,6 @@
         </el-row>
 
       </el-col>
-    </el-card>
   </div>
 </template>
 
@@ -180,13 +181,11 @@ export default {
 
 <style scoped>
   .title{
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 50px;
+    margin-top: 50px;
+    margin-left: 60px;
     /*color: #ffffff;*/
     /*color: transparent;*/
-    -webkit-text-stroke: 1px black;
+    /* -webkit-text-stroke: 1px black; */
     letter-spacing: 0.04em;
   }
   .subtitle{
@@ -202,7 +201,8 @@ export default {
   }
 
   .outer{
-    margin:50px;
+    margin:0px;
+    background: #ffffff;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)*/
   }
   .upload-demo{
@@ -277,8 +277,11 @@ export default {
     text-align: center;
     width: 50%; height: 50%
   }
-  .cardd{
-    height: 1200px;
-    /*background-color: #20a0ff;*/
+  .title-card{
+    width: 900px;
+    height: 290px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: rgb(239, 239, 239);
   }
 </style>

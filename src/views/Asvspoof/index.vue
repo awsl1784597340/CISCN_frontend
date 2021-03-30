@@ -1,8 +1,12 @@
 <template>
   <div class="outer">
-    <div class="title">
-      Asvspoof 虚假语音检测
-    </div>
+    <el-card class="title-card" shadow="hover">
+      <div class="title">
+        <font face="bold" style="font-size: 60px;"><strong>欢迎使用语音生成！</strong></font>
+        <br><br><br>
+        <font face="YouYuan" style="font-size: 20px;">这是语音转换界面，你可以选择两段音频分别作为输入内容源和音色源，我们会自动帮你生成转换后的音频。相关的信息会自动显示在两侧。</font>
+      </div>
+    </el-card>
     <div class="mainn">
       <el-row>
         <el-col :span="8">
@@ -152,9 +156,9 @@ export default {
     margin: 0 auto;
     text-align: center;
     font-size: 50px;
-    color: #ffffff;
+    color: #000000;
     /*color: transparent;*/
-    -webkit-text-stroke: 1px black;
+    /* -webkit-text-stroke: 1px black; */
     letter-spacing: 0.04em;
   }
   .infoleft{
@@ -193,5 +197,12 @@ export default {
   .optionn{
     margin-left: 50px;
     margin-top: 50px;
+  }
+  .title-card{
+    width: 900px;
+    height: 290px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: rgb(239, 239, 239);
   }
 </style>
