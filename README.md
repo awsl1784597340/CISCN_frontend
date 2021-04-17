@@ -47,3 +47,10 @@ src/router/index.js
 
 src/layout/components/AppMain.vue
 
+### 4.17更新
+#### 策略修改
+使用vscode在`wsl6`上的`/data/users/yangli/flask_upload` 运行app.py文件可以自动端口转发到本地，只需要开启前端即可
+#### 完成功能
+跑通 realtime voice cloning 前后端
+#### TODO
+界面的优化

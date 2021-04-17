@@ -53,64 +53,83 @@
         <div style="min-font-size: 9" />
       </el-col>
     </el-row>
+    <el-row>
+      <div v-if="converted_path">
+        <vue-audio
+          :audio-source="converted_path"
+          style="height: 178px;width: 360px"
+        />
+      </div>
+    </el-row>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'RealTimeVoiceCloning',
   data() {
     return {
       generalUrl: 'http://127.0.0.1:5000',
       UploadUrl: 0,
+      fileurl:null,
       textarea: '',
       infocenter: ['infocenter1', 'infocenter1', 'infocenter1', 'infocenter1'],
-      empty: null
+      empty: null,
+      converted_path:null,
+      running:false
     }
   },
   methods: {
     succs(res) {
       console.log(res)
-      this.UploadUrl = this.generalUrl + res.path
+      this.UploadUrl = this.generalUrl  + res.path
+      this.fileurl = res.path
       console.log(this.UploadUrl)
     },
     convertt() {
+      this.infocenter[0] = 'infocenter1'
+      this.infocenter[1] = 'infocenter1'
+      this.infocenter[2] = 'infocenter1'
+      this.infocenter[3] = 'infocenter1'
       const that = this
-      setTimeout(() => {
-        this.infocenter[0] = 'infocenter2'
-        that.refresh()
+      that.running =true
+      // console.log(that.fileurl,that.textarea)
+      axios.get(`${that.generalUrl}/voice-cloning?file=${that.fileurl}&text=${that.textarea}`).then((res)=>{
+        console.log(res)
+        if(res.data.code === 200){
+          that.converted_path = that.generalUrl + '/' + res.data.filepath
+          that.running=false
+          that.showResult = 1
+          that.$notify({
+            title: '提示',
+            message: h('i', { style: 'color: teal' }, '转换完成，请浏览转换结果')
+          })
+        }
+      })
         setTimeout(() => {
-          // this.infocenter[0] = "infocenter1"
-          this.infocenter[1] = 'infocenter2'
+          this.infocenter[0] = 'infocenter2'
           that.refresh()
           setTimeout(() => {
-            // this.infocenter[1] = "infocenter1"
-            this.infocenter[2] = 'infocenter2'
+            // this.infocenter[0] = "infocenter1"
+            this.infocenter[1] = 'infocenter2'
             that.refresh()
             setTimeout(() => {
-              // this.infocenter[2] = "infocenter1"
-              this.infocenter[3] = 'infocenter2'
+              // this.infocenter[1] = "infocenter1"
+              this.infocenter[2] = 'infocenter2'
               that.refresh()
               setTimeout(() => {
-                // this.infocenter[3] = "infocenter1"
+                // this.infocenter[2] = "infocenter1"
+                this.infocenter[3] = 'infocenter2'
                 that.refresh()
-                that.showResult = 1
-                that.$notify({
-                  title: '提示',
-                  message: h('i', { style: 'color: teal' }, '转换完成，请浏览转换结果')
-                })
                 setTimeout(() => {
-                  this.infocenter[0] = 'infocenter1'
-                  this.infocenter[1] = 'infocenter1'
-                  this.infocenter[2] = 'infocenter1'
-                  this.infocenter[3] = 'infocenter1'
+                  // this.infocenter[3] = "infocenter1"
                   that.refresh()
-                }, 2000)
+                }, 1000)
               }, 1000)
             }, 1000)
           }, 1000)
         }, 1000)
-      }, 1000)
       const h = this.$createElement
     },
     refresh() {
