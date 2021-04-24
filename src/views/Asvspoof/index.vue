@@ -45,7 +45,7 @@
                     v-for="item in options"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value"
+                    :value="item.key"
                   />
                 </el-select>
               </el-col>
@@ -74,16 +74,32 @@
             <div class="textt">
               高维向量特征投影
             </div>
-            <el-image :src="vector2" />
+            <el-image :src="PCA_image_path" />
           </div>
           <div v-else style="min-height: 1px" />
         </el-col>
         <!--        <el-col :span="1.5"><div style="min-width: 1px"></div></el-col>-->
         <el-col v-if="showResult":span="8">
           <!--          <div class="border" ></div>-->
-          <div class="textt">
-            控制台输出
-          </div>
+<!--          <div class="textt">-->
+<!--            控制台输出-->
+<!--          </div>-->
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>控制台结果返回</span>
+              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            </div>
+            <div class="text item">
+              文件名：{{filename}}
+            </div>
+            <div class="text item">
+              数据库：{{options[value].label}}
+            </div>
+            <div class="text item">
+                本次查询结果：正确率为{{score}}
+            </div>
+
+          </el-card>
         </el-col>
         <!--        <el-col :span="1.5"><div style="min-width: 1px"></div></el-col>-->
         <el-col :span="8">
@@ -105,6 +121,7 @@ import resemblyzer from './p225_003.png'
 import mfcc from './p226_001.png'
 import vector2 from './Untitled.png'
 import similar from './p225_003_to_p226_001.png'
+import axios from 'axios'
 export default {
   name: 'Asvspoof',
   data() {
@@ -114,34 +131,65 @@ export default {
       generalUrl: 'http://127.0.0.1:5000',
       infocenter: ['infocenter1', 'infocenter1', 'infocenter1', 'infocenter1'],
       empty: null,
+      fileurl:null,
       resemblyzer,
       mfcc,
       vector2,
       similar,
       options: [{
         value: '选项1',
-        label: 'Asvspoof2021'
+        label: 'Asvspoof2021',
+        key:0
       }, {
         value: '选项2',
-        label: 'Asvspoof2019'
+        label: 'Asvspoof2019',
+        key:1
       }, {
         value: '选项3',
-        label: '郭德纲'
+        label: '郭德纲',
+        key:2
       }, {
         value: '选项4',
-        label: '高晓松'
+        label: '高晓松',
+        key:3
       }],
-      value: ''
+      value: '',
+      PCA_image_path:null,
+      score:0,
+      errorflag:false,
+      filename:null,
     }
   },
   methods: {
     succs(res) {
       console.log(res)
+      this.fileurl = res.path
       this.UploadUrl = this.generalUrl + res.path
       console.log(this.UploadUrl)
     },
     convertt() {
-      this.showResult = 1
+      let that = this
+      console.log(that.value)
+      axios.get(`${that.generalUrl}/asvspoof?file=${that.fileurl}&databases=${that.value}`).then((res)=>{
+        console.log(res)
+        if(res.data.code === 200){
+          that.PCA_image_path = that.generalUrl + res.data.PCA
+          that.score = res.data.score
+          that.filename = res.data.filename
+          that.showResult = 1
+          // window.open(that.PCA_image_path)
+        //   that.converted_path = that.generalUrl + '/' + res.data.filepath
+        //   that.running=false
+        //   that.showResult = 1
+        //   that.$notify({
+        //     title: '提示',
+        //     message: h('i', { style: 'color: teal' }, '转换完成，请浏览转换结果')
+        //   })
+        }else {
+          that.errorflag = true
+        }
+      })
+
     }
   }
 }
@@ -187,7 +235,7 @@ export default {
     color: #ffffff;
   }
   .border{
-    margin-top: 0px;
+    margin-top: 50px;
   }
   .secondrow{
     margin-top: 50px;
@@ -202,5 +250,26 @@ export default {
     margin: 0 auto;
     margin-top: 30px;
     background-color: rgb(239, 239, 239);
+  }
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    margin-top: 50px;
+    width: 480px;
   }
 </style>
