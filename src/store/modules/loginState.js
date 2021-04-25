@@ -3,7 +3,7 @@ export default {
   state: {
 
 
-    token:null
+    token:'114514'
 
   },
 
