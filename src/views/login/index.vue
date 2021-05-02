@@ -59,11 +59,12 @@
     name: 'Login',
     data() {
       const validateUsername = (rule, value, callback) => {
-        if (!validUsername(value)) {
-          callback(new Error('Please enter the correct user name'))
-        } else {
-          callback()
-        }
+        // if (!validUsername(value)) {
+        //   callback(new Error('Please enter the correct user name'))
+        // } else {
+        //   callback()
+        // }
+        callback()
       }
       const validatePassword = (rule, value, callback) => {
         if (value.length < 6) {
@@ -75,7 +76,7 @@
       return {
         loginForm: {
           username: 'admin',
-          password: '111111',
+          password: '114514',
         },
         loginRules: {
           username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -116,7 +117,7 @@
           if(res.data.code == 200){
             that.$store.commit('setToken', res.data.token);
             console.log(that.$store.getters.getToken)
-            that.$router.push({path:'/'})
+            that.$router.push({path:'/dashboard'})
           }
         })
 

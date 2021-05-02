@@ -14,13 +14,13 @@
         <el-input v-model="form.name" style="width:400px"/>
       </el-form-item>
       <br />
-      <!-- <el-form-item label="应用场景">
-        <el-select v-model="form.application" placeholder="请选择模型应用场景">
-          <el-option label="内容审核" value="application1" />
-          <el-option label="身份判别" value="application2" />
-          <el-option label="司法取证" value="application3" />
-        </el-select>
-      </el-form-item> -->
+<!--      <el-form-item label="应用场景">-->
+<!--        <el-select v-model="form.application" placeholder="请选择模型应用场景">-->
+<!--          <el-option label="内容审核" value="application1" />-->
+<!--          <el-option label="身份判别" value="application2" />-->
+<!--          <el-option label="司法取证" value="application3" />-->
+<!--        </el-select>-->
+<!--      </el-form-item>-->
       <el-form-item label="应用场景">
         <font color="#FF0000">*</font> &emsp;
         <el-radio-group v-model="form.application">
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -60,15 +61,56 @@ export default {
         application: '',
         target: '',
         desc: ''
-      }
+      },
+      generalUrl:'http://127.0.0.1:5000'
     }
   },
   methods: {
     onSubmit() {
-      
-      this.$message({
-        message: '创建成功!',
-        type: 'success'
+      let that = this
+      if(!that.form.name){
+        this.$message({
+          message: '请输入模型名称',
+          type: 'warning'
+        })
+        return
+      }
+      if(!that.form.type){
+        this.$message({
+          message: '请输入模型类型',
+          type: 'warning'
+        })
+        return
+      }
+      if(!that.form.application){
+        this.$message({
+          message: '请输入模型应用场景',
+          type: 'warning'
+        })
+        return
+      }
+      let data1 = new FormData();
+      data1.append('token',that.$store.getters.getToken)
+      data1.append('type',that.form.type)
+      data1.append('modelname',that.form.name)
+      data1.append('useStage',that.form.application)
+      if(that.form.target){
+        data1.append('target',that.form.target)
+      }else{
+        data1.append('target','null')
+      }
+      if(that.form.desc){
+        data1.append('description',that.form.desc)
+      }else{
+        data1.append('description','null')
+      }
+      axios.post(`${that.generalUrl}/updateModel`,data1).then((res)=>{
+        if (res.data.code == 201){
+          this.$message({
+            message: '创建成功!',
+            type: 'success'
+          })
+        }
       })
     },
     onCancel() {
