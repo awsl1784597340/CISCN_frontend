@@ -79,7 +79,7 @@
           <div v-else style="min-height: 1px" />
         </el-col>
         <!--        <el-col :span="1.5"><div style="min-width: 1px"></div></el-col>-->
-        <el-col v-if="showResult":span="8">
+        <el-col v-if="showResult" :span="8">
           <!--          <div class="border" ></div>-->
 <!--          <div class="textt">-->
 <!--            控制台输出-->

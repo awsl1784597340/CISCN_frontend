@@ -56,48 +56,82 @@ export const constantRoutes = [
   },
 
   {
-    path: '/FakeAudioGenerate',
+    path: '/ModelManager',
     component: Layout,
-    redirect: '/FakeAudioGenerate/RealTimeVoiceCloning',
-    name: 'FakeAudioGenerate',
-    meta: { title: '虚假语音生成', icon: 'el-icon-s-help' },
+    redirect: '/ModelManager/ModelManager/MyModel',
+    name: 'ModelManager',
+    meta: { title: '模型中心', icon: 'el-icon-menu' },
     children: [
       {
-        path: 'RealTimeVoiceCloning',
-        name: 'RealTimeVoiceCloning',
-        component: () => import('@/views/RealTimeVoiceCloning/index'),
-        meta: { title: '实时语音生成', icon: 'table' }
+        path: 'MyModel',
+        name: 'MyModel',
+        component: () => import('@/views/ModelManager/MyModel/index'),
+        meta: { title: '我的模型' }
       },
       {
-        path: 'CycleGAN',
-        name: 'CycleGAN',
-        component: () => import('@/views/CycleGAN/index'),
-        meta: { title: 'CycleGAN', icon: 'tree' }
-      }
+        path: 'CreateModel',
+        name: 'CreateModel',
+        component: () => import('@/views/ModelManager/CreateModel/index'),
+        meta: { title: '创建模型' }
+      },
+      {
+        path: 'TrainModel',
+        name: 'TrainModel',
+        component: () => import('@/views/ModelManager/TrainModel/index'),
+        meta: { title: '训练模型' }
+      },
+      {
+        path: 'TestModel',
+        name: 'TestModel',
+        component: () => import('@/views/ModelManager/TestModel/index'),
+        meta: { title: '校验模型' }
+      },
     ]
   },
 
-  {
-    path: '/FakeAudioDetection',
-    component: Layout,
-    redirect: '/FakeAudioDetection/Asvspoof',
-    name: 'FakeAudioGenerate',
-    meta: { title: '虚假语音检测', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'Asvspoof',
-        name: 'Asvspoof',
-        component: () => import('@/views/Asvspoof/index'),
-        meta: { title: 'Asvspoof', icon: 'table' }
-      },
-      {
-        path: 'Celebrity',
-        name: 'Celebrity',
-        component: () => import('@/views/Celebrity/index'),
-        meta: { title: 'Celebrity', icon: 'tree' }
-      }
-    ]
-  },
+  // {
+  //   path: '/FakeAudioGenerate',
+  //   component: Layout,
+  //   redirect: '/FakeAudioGenerate/RealTimeVoiceCloning',
+  //   name: 'FakeAudioGenerate',
+  //   meta: { title: '虚假语音生成', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'RealTimeVoiceCloning',
+  //       name: 'RealTimeVoiceCloning',
+  //       component: () => import('@/views/RealTimeVoiceCloning/index'),
+  //       meta: { title: '实时语音生成', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'CycleGAN',
+  //       name: 'CycleGAN',
+  //       component: () => import('@/views/CycleGAN/index'),
+  //       meta: { title: 'CycleGAN', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/FakeAudioDetection',
+  //   component: Layout,
+  //   redirect: '/FakeAudioDetection/Asvspoof',
+  //   name: 'FakeAudioGenerate',
+  //   meta: { title: '虚假语音检测', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'Asvspoof',
+  //       name: 'Asvspoof',
+  //       component: () => import('@/views/Asvspoof/index'),
+  //       meta: { title: 'Asvspoof', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'Celebrity',
+  //       name: 'Celebrity',
+  //       component: () => import('@/views/Celebrity/index'),
+  //       meta: { title: 'Celebrity', icon: 'tree' }
+  //     }
+  //   ]
+  // },
 
   // {
   //   path: '/example',
