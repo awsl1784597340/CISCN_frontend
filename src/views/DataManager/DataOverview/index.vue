@@ -1,11 +1,11 @@
 <template>
   <el-row>
-    <el-col :span="2"><div class="grid-content"></div></el-col>
-    <el-col :span="20">
+    <el-col :span="3"><div class="grid-content"></div></el-col>
+    <el-col :span="18">
 
       <el-button type="primary" size="medium" class="create-button" @click="createdataset">创建数据集</el-button>
 
-      <div v-for="(item, i) in datasetlist" :key="i">
+      <!-- <div v-for="(item, i) in datasetlist" :key="i">
         <el-card class="box-card" header-cell-style="background: #eef1f6">
           <div slot="header" class="clearfix">
             <span><strong>{{ item[0].name }}</strong> &nbsp;ID:{{ item[0].id }}</span>
@@ -13,38 +13,55 @@
               <i class="el-icon-delete el-icon--left"></i>
               删除数据集
             </el-button>
-          </div>
+          </div> -->
             <el-table
-              :data="item"
-              border
+              :data="datasetlist"
+              stripe
+              :header-cell-style="{background: '#eef1f6', height: 60+'px'}"
+              :row-style="{height: 100+'px'}"
               style="width: 100%">
+              <el-table-column
+                prop="id"
+                label="ID"
+                width=80px>
+              </el-table-column>
+              <el-table-column
+                prop="name"
+                label="名称"
+                width=150px>
+              </el-table-column>
               <el-table-column
                 prop="createtime"
                 label="创建时间"
-                width="200">
+                width=150px>
               </el-table-column>
               <el-table-column
-                prop="description"
-                label="具体描述"
-                width="400">
+                prop="size"
+                label="数据集大小"
+                width=100px>
               </el-table-column>
               <el-table-column
                 prop="state"
                 label="是否标注"
-                width="200">
+                width=100px>
+              </el-table-column>
+              <el-table-column
+                prop="description"
+                label="具体描述">
               </el-table-column>
               <el-table-column
                 label="操作"
               >
                 <el-button @click="check" type="text" size="small">查看</el-button>
                 <el-button @click="createdataset" type="text" size="small">编辑</el-button>
+                <el-button @click="deletedataset" type="text" size="small">删除</el-button>
               </el-table-column>
             </el-table>
-        </el-card>
-      </div>
+        <!-- </el-card>
+      </div> -->
 
     </el-col>
-    <el-col :span="2"><div class="grid-content"></div></el-col>
+    <el-col :span="3"><div class="grid-content"></div></el-col>
   </el-row>
 
 </template>
@@ -97,26 +114,27 @@ export default {
              'name': '特朗普音频数据集',
              'username':'shadowstar',
              'state': 1,
-             'description':'特朗普音频数据集，仅包含正样本，共1小时音频'},
+             'description':'特朗普音频数据集，仅包含正样本，共1小时音频',
+             'size': 500},
             {'id': 2393,
              'createtime':"2021-05-03",
              'name': '普京音频数据集',
              'username':'shadowstar',
              'state': 0,
-             'description':'普京音频数据集，仅包含正样本，共1小时音频'},
+             'description':'普京音频数据集，仅包含正样本，共1小时音频',
+             'size': 345},
             {'id': 2483,
              'createtime':"2021-05-03",
              'name': '钟南山音频数据集',
              'username':'shadowstar',
              'state': 1,
-             'description':'钟南山音频数据集，仅包含正样本，共1小时音频'}
+             'description':'钟南山音频数据集，仅包含正样本，共1小时音频',
+             'size': 646}
           ]
-          this.datasetlist = [];
-          for (var i = 0; i < res.datasetList.length; i++) {
-            var l = [];
-            res.datasetList[i].state = (res.datasetList[i].state) ? "已标注" : "未标注";
-            l.push(res.datasetList[i]);
-            this.datasetlist.push(l);
+          this.datasetlist = res.datasetList;
+          for (var i = 0; i < this.datasetlist.length; i++) {
+            this.datasetlist[i].state = (this.datasetlist[i].state) ? "已标注" : "未标注";
+            this.datasetlist[i].size = String(this.datasetlist[i].size) + " MB";
           } 
         }
       });
@@ -158,6 +176,10 @@ export default {
   }
 
   .box-card {
+    margin-top: 30px;
+  }
+
+  .el-table {
     margin-top: 30px;
   }
   
