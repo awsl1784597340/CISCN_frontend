@@ -1,17 +1,21 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
+    <el-form ref="form" :model="form" label-width="150px">
       <br />
       <el-form-item label="模型类别">
+        <div class="style1">
         <font color="#FF0000">*</font> &emsp;
         <el-select v-model="form.type" placeholder="请选择模型类别">
           <el-option label="特定说话人鉴别" value="type1" />
         </el-select>
+        </div>
       </el-form-item>
       <br />
       <el-form-item label="模型名称">
+        <div class="style1">
         <font color="#FF0000">*</font> &emsp;
         <el-input v-model="form.name" style="width:400px"/>
+        </div>
       </el-form-item>
       <br />
 <!--      <el-form-item label="应用场景">-->
@@ -22,6 +26,7 @@
 <!--        </el-select>-->
 <!--      </el-form-item>-->
       <el-form-item label="应用场景">
+        <div class="style1">
         <font color="#FF0000">*</font> &emsp;
         <el-radio-group v-model="form.application">
           <el-radio label="内容审核" value="application1"></el-radio>
@@ -29,22 +34,30 @@
           <el-radio label="司法取证" value="application3"></el-radio>
           <el-radio label="其他" value="application4"></el-radio>
         </el-radio-group>
+        </div>
       </el-form-item>
       <br />
       <el-form-item label="鉴别对象">
+        <div class="style1">
         <font color="#FFFFFF">.</font> &emsp;
         <el-input v-model="form.target" style="width:400px"/>
+        </div>
       </el-form-item>
       <br />
       <el-form-item label="具体描述">
+        <div class="style1">
         <font color="#FFFFFF">.</font> &emsp;
         <el-input v-model="form.desc" type="textarea" style="width:400px" :rows="5"/>
+        </div>
       </el-form-item>
       <br />
       <el-form-item>
+        <div class="style1">
+        <font color="#FFFFFF">.</font> &emsp;
         <el-button type="primary" @click="onSubmit">创建</el-button>
         &nbsp;
         <el-button @click="onCancel">取消</el-button>
+        </div>
       </el-form-item>
     </el-form>
   </div>
@@ -126,6 +139,10 @@ export default {
 <style scoped>
 .line{
   text-align: center;
+}
+.style1 {
+  float:left;
+  margin-left:30px;
 }
 </style>
 

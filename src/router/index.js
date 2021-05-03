@@ -58,7 +58,7 @@ export const constantRoutes = [
   {
     path: '/ModelManager',
     component: Layout,
-    redirect: '/ModelManager/ModelManager/MyModel',
+    redirect: '/ModelManager/MyModel',
     name: 'ModelManager',
     meta: { title: '模型中心', icon: 'el-icon-menu' },
     children: [
@@ -72,7 +72,7 @@ export const constantRoutes = [
         path: 'CreateModel',
         name: 'CreateModel',
         component: () => import('@/views/ModelManager/CreateModel/index'),
-        meta: { title: '创建模型' }
+        meta: { title: '创建编辑模型' }
       },
       {
         path: 'TrainModel',
@@ -84,7 +84,35 @@ export const constantRoutes = [
         path: 'TestModel',
         name: 'TestModel',
         component: () => import('@/views/ModelManager/TestModel/index'),
-        meta: { title: '校验模型' }
+        meta: { title: '模型详情与校验' }
+      },
+    ]
+  },
+
+  {
+    path: '/DataManager',
+    component: Layout,
+    redirect: '/DataManager/DataOverview',
+    name: 'DataManager',
+    meta: { title: '数据服务', icon: 'el-icon-document' },
+    children: [
+      {
+        path: 'DataOverview',
+        name: 'DataOverview',
+        component: () => import('@/views/DataManager/DataOverview/index'),
+        meta: { title: '数据总览' }
+      },
+      {
+        path: 'DatasetCreate',
+        name: 'DatasetCreate',
+        component: () => import('@/views/DataManager/DatasetCreate/index'),
+        meta: { title: '数据集创建' }
+      },
+      {
+        path: 'DataManage',
+        name: 'DataManage',
+        component: () => import('@/views/DataManager/DataManage/index'),
+        meta: { title: '数据管理' }
       },
     ]
   },
