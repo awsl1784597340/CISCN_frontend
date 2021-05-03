@@ -9,7 +9,7 @@
         <el-card class="box-card" header-cell-style="background: #eef1f6">
           <div slot="header" class="clearfix">
             <span>【{{ item[0].type }}】 <strong>{{ item[0].modelname }}</strong> &nbsp;ID:{{ item[0].id }}</span>
-            <el-button style="float: right; padding: 3px 0" type="text" @click="deletemodel">
+            <el-button style="float: right; padding: 3px 0" type="text" @click="deletemodel(item[0])">
               <i class="el-icon-delete el-icon--left"></i>
               删除模型
             </el-button>
@@ -46,9 +46,9 @@
               <el-table-column
                 label="操作"
               >
-                <el-button @click="train" type="text" size="small">训练</el-button>
-                <el-button @click="check" type="text" size="small" v-if="item[0].state=='训练完成'">校验</el-button>
-                <el-button @click="check" type="text" size="small" v-if="item[0].state=='训练未完成'">查看</el-button>
+                <el-button @click="train(item[0])" type="text" size="small">训练</el-button>
+                <el-button @click="check(item[0])" type="text" size="small" v-if="item[0].state=='训练完成'">校验</el-button>
+                <el-button @click="check(item[0])" type="text" size="small" v-if="item[0].state=='训练未完成'">查看</el-button>
                 <el-button @click="editmodel(item[0])" type="text" size="small">编辑</el-button>
               </el-table-column>
             </el-table>
@@ -65,14 +65,13 @@
 import axios from 'axios'
 export default {
   methods: {
-    train() {
+    train(item) {
       this.$router.push('/ModelManager/TrainModel');
     },
     createmodel() {
       this.$router.push('/ModelManager/CreateModel');
     },
     editmodel(item) {
-      console.log(item);
       this.$router.push({
         name: 'CreateModel',
         params: {
@@ -84,10 +83,10 @@ export default {
         }
       });
     },
-    check() {
+    check(item) {
       this.$router.push('/ModelManager/TestModel');
     },
-    deletemodel() {
+    deletemodel(item) {
       this.$confirm('此操作将永久删除该模型, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

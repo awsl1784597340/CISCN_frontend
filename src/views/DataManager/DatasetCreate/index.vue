@@ -57,6 +57,14 @@
 <script>
 import axios from 'axios'
 export default {
+  created() {
+    console.log(this.$route.params);
+    if (this.$route.params) {
+      this.form.name = this.$route.params.name;
+      this.form.state = this.$route.params.state;
+      this.form.desc = this.$route.params.description;
+    }
+  },
   data() {
     return {
       uploaded: false, // 上传成功后修改为true

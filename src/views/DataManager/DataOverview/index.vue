@@ -53,9 +53,11 @@
               <el-table-column
                 label="操作"
               >
-                <el-button @click="check" type="text" size="small">查看</el-button>
-                <el-button @click="createdataset" type="text" size="small">编辑</el-button>
-                <el-button @click="deletedataset" type="text" size="small">删除</el-button>
+              <template slot-scope="scope">
+                <el-button @click="check(scope.row)" type="text" size="small">查看</el-button>
+                <el-button @click="editdataset(scope.row)" type="text" size="small">编辑</el-button>
+                <el-button @click="deletedataset(scope.row)" type="text" size="small">删除</el-button>
+              </template>
               </el-table-column>
             </el-table>
           </div>
@@ -72,13 +74,25 @@
 import axios from 'axios'
 export default {
   methods: {
+    editdataset(item) {
+      console.log(item);
+      var state = item.state ? '已标注完成' : '未标注完成';
+      this.$router.push({
+        name: 'DatasetCreate',
+        params: {
+          name: item.name,
+          state: state,
+          description: item.description
+        }
+      });
+    },
     createdataset() {
       this.$router.push('/DataManager/DatasetCreate');
     },
-    check() {
+    check(item) {
       this.$router.push('/DataManager/DataOverview');
     },
-    deletedataset() {
+    deletedataset(item) {
       this.$confirm('此操作将永久删除该模型, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
