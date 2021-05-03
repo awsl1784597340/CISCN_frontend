@@ -66,6 +66,15 @@
 <script>
 import axios from 'axios'
 export default {
+  created() {
+    if (this.$route.params) {
+      this.form.name = this.$route.params.modelname;
+      this.form.type = this.$route.params.type;
+      this.form.application = this.$route.params.useStage;
+      this.form.target = this.$route.params.target;
+      this.form.desc = this.$route.params.description;
+    }
+  },
   data() {
     return {
       form: {

@@ -46,9 +46,10 @@
               <el-table-column
                 label="操作"
               >
+                <el-button @click="train" type="text" size="small">训练</el-button>
                 <el-button @click="check" type="text" size="small" v-if="item[0].state=='训练完成'">校验</el-button>
                 <el-button @click="check" type="text" size="small" v-if="item[0].state=='训练未完成'">查看</el-button>
-                <el-button @click="createmodel" type="text" size="small">编辑</el-button>
+                <el-button @click="editmodel(item[0])" type="text" size="small">编辑</el-button>
               </el-table-column>
             </el-table>
         </el-card>
@@ -64,8 +65,24 @@
 import axios from 'axios'
 export default {
   methods: {
+    train() {
+      this.$router.push('/ModelManager/TrainModel');
+    },
     createmodel() {
       this.$router.push('/ModelManager/CreateModel');
+    },
+    editmodel(item) {
+      console.log(item);
+      this.$router.push({
+        name: 'CreateModel',
+        params: {
+          id: item.type,
+          modelname: item.modelname,
+          useStage: item.useStage,
+          target: item.target,
+          description: item.description
+        }
+      });
     },
     check() {
       this.$router.push('/ModelManager/TestModel');

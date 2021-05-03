@@ -5,15 +5,16 @@
 
       <el-button type="primary" size="medium" class="create-button" @click="createdataset">创建数据集</el-button>
 
-      <!-- <div v-for="(item, i) in datasetlist" :key="i">
+    <!-- <div v-for="(item, i) in datasetlist" :key="i">
         <el-card class="box-card" header-cell-style="background: #eef1f6">
           <div slot="header" class="clearfix">
             <span><strong>{{ item[0].name }}</strong> &nbsp;ID:{{ item[0].id }}</span>
             <el-button style="float: right; padding: 3px 0" type="text" @click="deletedataset">
               <i class="el-icon-delete el-icon--left"></i>
               删除数据集
-            </el-button>
+            </el-button> 
           </div> -->
+          <div class ="table">
             <el-table
               :data="datasetlist"
               stripe
@@ -57,6 +58,7 @@
                 <el-button @click="deletedataset" type="text" size="small">删除</el-button>
               </el-table-column>
             </el-table>
+          </div>
         <!-- </el-card>
       </div> -->
 
@@ -179,7 +181,7 @@ export default {
     margin-top: 30px;
   }
 
-  .el-table {
+  .table {
     margin-top: 30px;
   }
   
