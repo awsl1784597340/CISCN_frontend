@@ -108,12 +108,12 @@ export const constantRoutes = [
         component: () => import('@/views/DataManager/DatasetCreate/index'),
         meta: { title: '数据集创建' }
       },
-      {
-        path: 'DataManage',
-        name: 'DataManage',
-        component: () => import('@/views/DataManager/DataManage/index'),
-        meta: { title: '数据管理' }
-      },
+      // {
+      //   path: 'DataManage',
+      //   name: 'DataManage',
+      //   component: () => import('@/views/DataManager/DataManage/index'),
+      //   meta: { title: '数据管理' }
+      // },
     ]
   },
 
